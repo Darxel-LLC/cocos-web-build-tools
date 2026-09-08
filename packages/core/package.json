@@ -1,0 +1,42 @@
+{
+  "name": "@darxel/cocos-web-build-tools",
+  "version": "0.1.0",
+  "description": "Configurable Cocos Creator web builds, image optimization, packaging and platform preview.",
+  "license": "MIT",
+  "author": "Darxel-LLC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Darxel-LLC/cocos-web-build-tools.git",
+    "directory": "packages/core"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./cli": "./src/cli.mjs",
+    "./platforms": "./src/platforms.js",
+    "./preview": "./src/preview.mjs",
+    "./static-preview": "./src/static-preview.mjs",
+    "./types": "./src/adapter.d.ts"
+  },
+  "bin": {
+    "cocos-web-build": "bin/cocos-web-build.js"
+  },
+  "files": [
+    "bin/",
+    "src/",
+    "examples/",
+    "README.md",
+    "THIRD_PARTY.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node --test"
+  },
+  "dependencies": {
+    "@inquirer/prompts": "7.10.1",
+    "javascript-obfuscator": "4.2.2"
+  }
+}

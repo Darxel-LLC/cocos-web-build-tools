@@ -1,0 +1,9 @@
+node_modules/
+coverage/
+.cocos-build/
+build/
+*.tgz
+.env
+.env.*
+!.env.example
+vk-hosting-config.json

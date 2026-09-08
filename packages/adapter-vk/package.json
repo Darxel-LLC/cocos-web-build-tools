@@ -1,0 +1,37 @@
+{
+  "name": "@darxel/cocos-build-adapter-vk",
+  "version": "0.1.0",
+  "description": "VK platform adapter for Cocos Web Build Tools",
+  "license": "MIT",
+  "author": "Darxel-LLC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Darxel-LLC/cocos-web-build-tools.git",
+    "directory": "packages/adapter-vk"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./deploy": "./src/vk-deploy.mjs"
+  },
+  "files": [
+    "src/",
+    "README.md",
+    "LICENSE",
+    "vk-hosting-config.json.example"
+  ],
+  "scripts": {
+    "test": "node --test"
+  },
+  "peerDependencies": {
+    "@darxel/cocos-web-build-tools": "^0.1.0"
+  },
+  "dependencies": {
+    "@inquirer/prompts": "7.10.1",
+    "@vkontakte/vk-miniapps-deploy": "1.0.2",
+    "@vkontakte/vk-bridge": "3.0.2"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "name": "cocos-web-build-tools-workspace",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "check": "node scripts/check.mjs",
+    "test": "npm run test --workspaces --if-present",
+    "pack:check": "npm pack --workspaces --dry-run"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

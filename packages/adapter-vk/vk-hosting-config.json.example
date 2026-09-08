@@ -1,0 +1,5 @@
+{
+  "app_id": 0,
+  "static_path": "build/web-mobile-vk",
+  "endpoints": { "mobile": "index.html", "web": "index.html", "mvk": "index.html" }
+}
