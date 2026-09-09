@@ -1,11 +1,18 @@
 # VK Mini Apps build adapter
 
-`@darxel/cocos-build-adapter-vk` adds VK build preparation, static preview and hosting upload to `@darxel/cocos-web-build-tools`. It requires core `^0.1.0` and adapter API 1.
+`@darxel-llc/cocos-build-adapter-vk` adds VK build preparation, static preview and hosting upload to `@darxel-llc/cocos-web-build-tools`. It requires core `^0.1.0` and adapter API 1.
 
-Install the core and this adapter from their workspace directories or packed `.tgz` files. Register it in the game's `cocos-build.config.cjs`:
+Configure `@darxel-llc:registry=https://npm.pkg.github.com` in the game's `.npmrc` and log in with a GitHub personal access token (classic) with `read:packages`. Keep the token in your user npm configuration.
+
+```powershell
+npm login --scope=@darxel-llc --auth-type=legacy --registry=https://npm.pkg.github.com
+npm install --save-dev --save-exact @darxel-llc/cocos-web-build-tools@0.1.0 @darxel-llc/cocos-build-adapter-vk@0.1.0
+```
+
+Local workspace directories and packed `.tgz` files are also supported. Register the adapter in the game's `cocos-build.config.cjs`:
 
 ```javascript
-const { vk } = require("@darxel/cocos-build-adapter-vk");
+const { vk } = require("@darxel-llc/cocos-build-adapter-vk");
 module.exports = {
     configs: require("./build-configs.json").configs,
     platforms: [vk()],
@@ -26,7 +33,7 @@ Static preview helps inspect output, but actual platform services require the VK
 
 Copy [the example](vk-hosting-config.json.example) to `vk-hosting-config.json` in the game root. The menu offers build-and-deploy and deploy-existing actions. Uploading requires a matching VK build manifest, selection of application/environment and confirmation. Production requires a release build. Building or previewing never uploads anything.
 
-The pinned official uploader runs in an isolated process with the game as its working directory. Selected values are changed only in that process's configuration cache; the hosting file is not rewritten. The uploader manages OAuth/token storage and its `build.zip` artifact. Programmatic callers can import `deployVkBuild` from `@darxel/cocos-build-adapter-vk/deploy`; it retains the interactive selection and confirmation flow.
+The pinned official uploader runs in an isolated process with the game as its working directory. Selected values are changed only in that process's configuration cache; the hosting file is not rewritten. The uploader manages OAuth/token storage and its `build.zip` artifact. Programmatic callers can import `deployVkBuild` from `@darxel-llc/cocos-build-adapter-vk/deploy`; it retains the interactive selection and confirmation flow.
 
 ## Dependencies and license
 

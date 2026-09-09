@@ -4,6 +4,17 @@ Build, optimize, package and preview Cocos Creator web projects from one configu
 
 The initial supported environment is **Cocos Creator 3.8.8 on Windows with Node.js 22 or newer**. Other Creator versions and operating systems need validation and compatible external tools.
 
+## Install from GitHub Packages
+
+Add `@darxel-llc:registry=https://npm.pkg.github.com` to your game's `.npmrc`, then authenticate using your GitHub username and a personal access token (classic) with `read:packages`:
+
+```powershell
+npm login --scope=@darxel-llc --auth-type=legacy --registry=https://npm.pkg.github.com
+npm install --save-dev --save-exact @darxel-llc/cocos-web-build-tools@0.1.0
+```
+
+Keep the token in your user npm configuration, not in the repository. GitHub requires authentication even for public npm packages. See [GitHub's registry guide](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-npm-registry).
+
 ## Install for local development
 
 Clone this repository and install its dependencies:
@@ -22,7 +33,7 @@ npm install --save-dev ../cocos-web-build-tools/packages/core
 
 Adjust the relative path for your directory layout. npm links a local directory; run `npm ci` in the tools checkout as well as in the game. Changes to the tools are immediately visible to linked games.
 
-To use a self-contained package, run `npm pack --workspace @darxel/cocos-web-build-tools` from the repository root and install the resulting `.tgz` in the game. This repository is a monorepo: install individual workspace packages, not its root. Availability in the npm registry is not assumed.
+To test a self-contained package locally, run `npm pack --workspace @darxel-llc/cocos-web-build-tools` from the repository root and install the resulting `.tgz` in the game. This repository is a monorepo: install individual workspace packages, not its root.
 
 ## First build
 
@@ -125,9 +136,9 @@ Image overrides have the shape `{ "images": [{ "asset": "assets/ui/logo.png", "p
 Core includes `local` with static HTTP preview, no external SDK and `real` SDK mode. No platform registration is required for local builds. To customize it, include `local(options)` once in the array:
 
 ```javascript
-const { local } = require("@darxel/cocos-web-build-tools");
-const { yandex } = require("@darxel/cocos-build-adapter-yandex");
-const { vk } = require("@darxel/cocos-build-adapter-vk");
+const { local } = require("@darxel-llc/cocos-web-build-tools");
+const { yandex } = require("@darxel-llc/cocos-build-adapter-yandex");
+const { vk } = require("@darxel-llc/cocos-build-adapter-vk");
 
 // In your exported config:
 platforms: [
@@ -146,7 +157,7 @@ Platform instances share `id`, `label`, `apiVersion: 1`, `outputSuffix`, optiona
 A project module and an npm package implement the same contract. No registry service or core modification is needed:
 
 ```javascript
-const { definePlatform } = require("@darxel/cocos-web-build-tools");
+const { definePlatform } = require("@darxel-llc/cocos-web-build-tools");
 
 module.exports = function customPlatform() {
     return definePlatform({
@@ -177,9 +188,9 @@ Register it with `platforms: [require("./build-support/custom-platform.cjs")()]`
 | `preview(context)` | Optional start action returning `{ close(), finished? }`; `finished` reports child-process termination/errors |
 | `deploy(context)` | Optional explicit upload action; never called by build or dry-run |
 
-Type-only declarations are available from `@darxel/cocos-web-build-tools/types`. Distributed adapters should declare a compatible core version through `peerDependencies`.
+Type-only declarations are available from `@darxel-llc/cocos-web-build-tools/types`. Distributed adapters should declare a compatible core version through `peerDependencies`.
 
-The CLI derives actions from `preview` and `deploy` functions. There are no SDK-specific transport strings or platform-name branches in the menu. `cocos-web-build preview --platform <id>` calls that same `preview` function, including for dedicated proxies. The raw static server is exported from `@darxel/cocos-web-build-tools/static-preview` for adapters to reuse.
+The CLI derives actions from `preview` and `deploy` functions. There are no SDK-specific transport strings or platform-name branches in the menu. `cocos-web-build preview --platform <id>` calls that same `preview` function, including for dedicated proxies. The raw static server is exported from `@darxel-llc/cocos-web-build-tools/static-preview` for adapters to reuse.
 
 Build lifecycle:
 
@@ -209,7 +220,7 @@ Game scenes, HTML templates, SDK initialization, purchases, saves and QA interfa
 ## Programmatic use
 
 ```javascript
-const { runBuild } = require("@darxel/cocos-web-build-tools");
+const { runBuild } = require("@darxel-llc/cocos-web-build-tools");
 await runBuild(["release", "--version", "1.2.3"], { projectRoot: "C:/games/my-game" });
 ```
 

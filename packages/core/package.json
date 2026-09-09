@@ -1,12 +1,16 @@
 {
-  "name": "@darxel/cocos-web-build-tools",
+  "name": "@darxel-llc/cocos-web-build-tools",
   "version": "0.1.0",
   "description": "Configurable Cocos Creator web builds, image optimization, packaging and platform preview.",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://npm.pkg.github.com"
+  },
   "author": "Darxel-LLC",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Darxel-LLC/cocos-web-build-tools.git",
+    "url": "git+https://github.com/Darxel-LLC/cocos-web-build-tools.git",
     "directory": "packages/core"
   },
   "engines": {

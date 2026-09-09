@@ -1,5 +1,5 @@
 const path = require("node:path");
-const { definePlatform } = require("@darxel/cocos-web-build-tools");
+const { definePlatform } = require("@darxel-llc/cocos-web-build-tools");
 
 function vk(options = {}) {
     const sdkRoot = path.dirname(require.resolve("@vkontakte/vk-bridge/package.json"));
@@ -21,7 +21,7 @@ function vk(options = {}) {
             return { sdkMode, sdkUrl: "vk-bridge.js" };
         },
         async preview(context) {
-            const { startStaticServer } = await import("@darxel/cocos-web-build-tools/static-preview");
+            const { startStaticServer } = await import("@darxel-llc/cocos-web-build-tools/static-preview");
             const server = await startStaticServer(context.buildPath, context);
             return { close: () => new Promise((resolve, reject) => {
                 server.closeAllConnections();

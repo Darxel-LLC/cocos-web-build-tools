@@ -1,11 +1,18 @@
 # Yandex Games build adapter
 
-`@darxel/cocos-build-adapter-yandex` adds Yandex target validation and SDK dev proxy preview to `@darxel/cocos-web-build-tools`. It requires core `^0.1.0` and adapter API 1.
+`@darxel-llc/cocos-build-adapter-yandex` adds Yandex target validation and SDK dev proxy preview to `@darxel-llc/cocos-web-build-tools`. It requires core `^0.1.0` and adapter API 1.
 
-Install the core and this adapter from their workspace directories or packed `.tgz` files. Then register it in the game's `cocos-build.config.cjs`:
+Configure `@darxel-llc:registry=https://npm.pkg.github.com` in the game's `.npmrc` and log in with a GitHub personal access token (classic) with `read:packages`. Keep the token in your user npm configuration.
+
+```powershell
+npm login --scope=@darxel-llc --auth-type=legacy --registry=https://npm.pkg.github.com
+npm install --save-dev --save-exact @darxel-llc/cocos-web-build-tools@0.1.0 @darxel-llc/cocos-build-adapter-yandex@0.1.0
+```
+
+Local workspace directories and packed `.tgz` files are also supported. Register the adapter in the game's `cocos-build.config.cjs`:
 
 ```javascript
-const { yandex } = require("@darxel/cocos-build-adapter-yandex");
+const { yandex } = require("@darxel-llc/cocos-build-adapter-yandex");
 module.exports = {
     configs: require("./build-configs.json").configs,
     platforms: [yandex({ outputSuffix: "-yandex" })],

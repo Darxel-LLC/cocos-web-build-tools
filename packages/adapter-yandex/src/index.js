@@ -1,4 +1,4 @@
-const { definePlatform } = require("@darxel/cocos-web-build-tools");
+const { definePlatform } = require("@darxel-llc/cocos-web-build-tools");
 
 function yandex(options = {}) {
     return definePlatform({
