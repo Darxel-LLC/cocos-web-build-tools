@@ -27,7 +27,7 @@ Authenticate once using your GitHub username and a personal access token (classi
 ```powershell
 npm login --scope=@darxel-llc --auth-type=legacy --registry=https://npm.pkg.github.com
 npm install --save-dev --save-exact @darxel-llc/cocos-web-build-tools@0.1.0
-npm install --save-dev --save-exact @darxel-llc/cocos-build-adapter-yandex@0.1.0 @darxel-llc/cocos-build-adapter-vk@0.1.1
+npm install --save-dev --save-exact @darxel-llc/cocos-build-adapter-yandex@0.1.0 @darxel-llc/cocos-build-adapter-vk@0.1.2
 ```
 
 Even public npm packages on GitHub require authentication. For private packages, your account also needs read access. Authorize the token for your organization if it uses SSO. Keep credentials in your user npm configuration; never commit them. See [GitHub's npm registry guide](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-npm-registry).

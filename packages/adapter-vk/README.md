@@ -6,7 +6,7 @@ Configure `@darxel-llc:registry=https://npm.pkg.github.com` in the game's `.npmr
 
 ```powershell
 npm login --scope=@darxel-llc --auth-type=legacy --registry=https://npm.pkg.github.com
-npm install --save-dev --save-exact @darxel-llc/cocos-web-build-tools@0.1.0 @darxel-llc/cocos-build-adapter-vk@0.1.1
+npm install --save-dev --save-exact @darxel-llc/cocos-web-build-tools@0.1.0 @darxel-llc/cocos-build-adapter-vk@0.1.2
 ```
 
 Local workspace directories and packed `.tgz` files are also supported. Register the adapter in the game's `cocos-build.config.cjs`:
@@ -34,6 +34,8 @@ Static preview helps inspect output, but actual platform services require the VK
 Copy [the example](vk-hosting-config.json.example) to `vk-hosting-config.json` in the game root. The menu offers build-and-deploy and deploy-existing actions. Uploading requires a matching VK build manifest, selection of application/environment and confirmation. Production requires a release build. Building or previewing never uploads anything.
 
 The pinned official uploader runs in an isolated process with the game as its working directory. Selected values are changed only in that process's configuration cache; the hosting file is not rewritten. The uploader manages OAuth/token storage and its `build.zip` artifact. Programmatic callers can import `deployVkBuild` from `@darxel-llc/cocos-build-adapter-vk/deploy`; it retains the interactive selection and confirmation flow.
+
+For uploader 1.0.3, the worker recreates the multipart form and file stream for each upload attempt. This avoids reusing a consumed archive after a network failure. The workaround stays inside the uploader process and uses the uploader's existing retry limit. Upload transport errors omit the signed upload URL.
 
 ## Dependencies and license
 
