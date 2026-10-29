@@ -6,7 +6,7 @@ Configure `@darxel-llc:registry=https://npm.pkg.github.com` in the game's `.npmr
 
 ```powershell
 npm login --scope=@darxel-llc --auth-type=legacy --registry=https://npm.pkg.github.com
-npm install --save-dev --save-exact @darxel-llc/cocos-web-build-tools@0.1.0 @darxel-llc/cocos-build-adapter-vk@0.1.0
+npm install --save-dev --save-exact @darxel-llc/cocos-web-build-tools@0.1.0 @darxel-llc/cocos-build-adapter-vk@0.1.1
 ```
 
 Local workspace directories and packed `.tgz` files are also supported. Register the adapter in the game's `cocos-build.config.cjs`:
@@ -37,4 +37,4 @@ The pinned official uploader runs in an isolated process with the game as its wo
 
 ## Dependencies and license
 
-Our adapter source is [MIT](LICENSE). Runtime npm dependencies are `@vkontakte/vk-bridge` 3.0.2 (MIT), `@vkontakte/vk-miniapps-deploy` 1.0.2 (MIT), and `@inquirer/prompts` 7.10.1 (MIT). They keep their own notices and transitive dependency licenses. No native binaries or game assets are bundled.
+Our adapter source is [MIT](LICENSE). Runtime npm dependencies are `@vkontakte/vk-bridge` 3.0.2 (MIT), `@vkontakte/vk-miniapps-deploy` 1.0.3 (MIT), and `@inquirer/prompts` 7.10.1 (MIT). They keep their own notices and transitive dependency licenses. No native binaries or game assets are bundled.
