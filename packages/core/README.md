@@ -10,7 +10,7 @@ Add `@darxel-llc:registry=https://npm.pkg.github.com` to your game's `.npmrc`, t
 
 ```powershell
 npm login --scope=@darxel-llc --auth-type=legacy --registry=https://npm.pkg.github.com
-npm install --save-dev --save-exact @darxel-llc/cocos-web-build-tools@0.1.0
+npm install --save-dev --save-exact @darxel-llc/cocos-web-build-tools@0.1.1
 ```
 
 Keep the token in your user npm configuration, not in the repository. GitHub requires authentication even for public npm packages. See [GitHub's registry guide](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-npm-registry).
@@ -57,6 +57,8 @@ npx cocos-web-build build dev --project C:/games/my-game
 ```
 
 The package does not modify source scenes or install a game runtime. Creator still executes the game's own builder extensions.
+
+An open Creator editor does not block command-line builds; the package does not close it or require an override flag. Save the scenes and prefabs you want to include before building, and avoid editing build inputs or running another build of the same project until it finishes. Creator exit codes `0` and `36` are accepted only when the command produces a non-empty, fresh `index.html` in the selected output directory. Other exit codes and missing or stale HTML fail before platform processing and packaging.
 
 ## Commands
 

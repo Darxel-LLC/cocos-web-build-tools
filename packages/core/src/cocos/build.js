@@ -43,16 +43,17 @@ function createCocosTools(context) {
             throw result.error;
         }
 
-        if (result.status !== 0) {
-            const expectedBuildPath = resolveBuildRootPath(options.outputName);
-            if (result.status === 36 && fs.existsSync(path.join(expectedBuildPath, "index.html"))
-                && findNewestMtimeMs(expectedBuildPath) >= startedAt - 1000) {
-                console.log("Cocos Creator completed the command-line build (exit code 36).");
-                return;
-            }
-
+        if (result.status !== 0 && result.status !== 36) {
             throw new Error(`Command failed with exit code ${result.status}: ${formatCommand(cocosPath, args)}`);
         }
+
+        // A successful process exit alone does not prove that Creator produced a web build.
+        const indexPath = path.join(resolveBuildRootPath(options.outputName), "index.html");
+        const index = fs.existsSync(indexPath) ? fs.statSync(indexPath) : null;
+        if (!index?.isFile() || index.size === 0 || index.mtimeMs < startedAt - 1000) {
+            throw new Error(`Cocos Creator exited with code ${result.status} without producing a fresh index.html: ${indexPath}`);
+        }
+        if (result.status === 36) console.log("Cocos Creator completed the command-line build (exit code 36).");
     }
 
     function validateCocosBuildOptions(options) {
@@ -88,22 +89,6 @@ function createCocosTools(context) {
         }
         return String(value);
     }
-    function findNewestMtimeMs(rootPath) {
-        let newest = fs.statSync(rootPath).mtimeMs;
-        const entries = fs.readdirSync(rootPath, { withFileTypes: true });
-
-        for (const entry of entries) {
-            const entryPath = path.join(rootPath, entry.name);
-            const stats = fs.statSync(entryPath);
-            newest = Math.max(newest, stats.mtimeMs);
-            if (entry.isDirectory()) {
-                newest = Math.max(newest, findNewestMtimeMs(entryPath));
-            }
-        }
-
-        return newest;
-    }
-
     function defaultCreatorPath() {
         const version = context.config.cocos?.version || context.packageJson.creator?.version;
         if (!version || process.platform !== "win32") {

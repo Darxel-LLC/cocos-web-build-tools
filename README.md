@@ -26,7 +26,7 @@ Authenticate once using your GitHub username and a personal access token (classi
 
 ```powershell
 npm login --scope=@darxel-llc --auth-type=legacy --registry=https://npm.pkg.github.com
-npm install --save-dev --save-exact @darxel-llc/cocos-web-build-tools@0.1.0
+npm install --save-dev --save-exact @darxel-llc/cocos-web-build-tools@0.1.1
 npm install --save-dev --save-exact @darxel-llc/cocos-build-adapter-yandex@0.1.0 @darxel-llc/cocos-build-adapter-vk@0.1.2
 ```
 
