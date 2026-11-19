@@ -1,6 +1,6 @@
 # Cocos Web Build Tools
 
-A build pipeline for Cocos Creator web games. **Local builds and static preview work out of the box.** Add Yandex Games or VK Mini Apps by installing and registering an adapter.
+Build and asset tools for Cocos Creator web games. **Local builds and static preview work out of the box.** Add Yandex Games or VK Mini Apps by installing and registering an adapter.
 
 ## Packages
 
@@ -9,6 +9,7 @@ A build pipeline for Cocos Creator web games. **Local builds and static preview 
 | [`@darxel-llc/cocos-web-build-tools`](packages/core/README.md) | Creator builds, local adapter, image compression, obfuscation, ZIP, CLI and adapter contract |
 | [`@darxel-llc/cocos-build-adapter-yandex`](packages/adapter-yandex/README.md) | Yandex target rules and SDK dev proxy preview |
 | [`@darxel-llc/cocos-build-adapter-vk`](packages/adapter-vk/README.md) | VK Bridge files, screen settings, static preview and hosting upload |
+| [`@darxel-llc/cocos-prefab-tools`](packages/prefab-tools/README.md) | Standalone CLI to inspect, compare, lint and prune prefabs and scenes |
 
 Installing the core package does not install either platform adapter, VK Bridge or the VK uploader. A package being installed does not register it automatically. `local` remains the default unless the game sets `defaultPlatform`.
 
@@ -100,7 +101,7 @@ Each workspace has its own package manifest and MIT license. Adapters declare co
 
 Update the changed packages' versions and adapter peer dependencies as needed, run the checks above, and commit the lockfile with the manifests. Push to `main`, then run **Actions → Publish packages → Run workflow** on `main`.
 
-The workflow validates the workspace on Windows with Node.js 22 and publishes core before its adapters. It uses the repository's `GITHUB_TOKEN` with `packages: write`; no personal publishing token is needed. Existing versions are skipped so a partially completed publication can be resumed. To release changed content, increment its version first. `npm run publish:packages -- --dry-run` previews publication locally.
+The workflow validates the workspace on Windows with Node.js 22 and publishes core before its adapters. It uses the repository's `GITHUB_TOKEN` with `packages: write`. Existing versions are skipped so a partially completed publication can be resumed. To release changed content, increment its version first. `npm run publish:packages -- --dry-run` previews each package archive locally.
 
 GitHub initially creates packages with private visibility. To share them publicly, a package administrator must open each package's **Package settings → Change visibility → Public**. This does not remove the registry's authentication requirement for installation.
 

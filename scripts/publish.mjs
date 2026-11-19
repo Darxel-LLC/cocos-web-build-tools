@@ -19,7 +19,7 @@ function npm(args, capture = false) {
 }
 
 // Core must exist before consumers can resolve adapters' peer dependency.
-for (const directory of ["core", "adapter-yandex", "adapter-vk"]) {
+for (const directory of ["core", "adapter-yandex", "adapter-vk", "prefab-tools"]) {
     const manifest = JSON.parse(fs.readFileSync(path.join(root, "packages", directory, "package.json"), "utf8"));
     if (!manifest.name.startsWith("@darxel-llc/") || manifest.publishConfig?.registry !== registry) {
         throw new Error(`Unexpected publication target: ${directory}`);
@@ -36,6 +36,7 @@ for (const directory of ["core", "adapter-yandex", "adapter-vk"]) {
         try { errorCode = JSON.parse(existing.stdout).error?.code; } catch { /* Report the original error below. */ }
         if (errorCode !== "E404") throw new Error(`Cannot check ${spec}: ${existing.stderr || existing.stdout}`);
     }
-    const result = npm(["publish", "--workspace", manifest.name, ...(dryRun ? ["--dry-run"] : [])]);
-    if (result.status !== 0) throw new Error(`Publishing ${spec} failed (${result.status ?? result.signal}).`);
+    const args = dryRun ? ["pack", "--workspace", manifest.name, "--dry-run"] : ["publish", "--workspace", manifest.name];
+    const result = npm(args);
+    if (result.status !== 0) throw new Error(`${dryRun ? "Packing" : "Publishing"} ${spec} failed (${result.status ?? result.signal}).`);
 }

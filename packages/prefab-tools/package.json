@@ -1,0 +1,31 @@
+{
+  "name": "@darxel-llc/cocos-prefab-tools",
+  "version": "0.1.0",
+  "description": "Inspect, compare, validate and prune Cocos Creator prefabs and scenes.",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://npm.pkg.github.com"
+  },
+  "author": "Darxel-LLC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Darxel-LLC/cocos-web-build-tools.git",
+    "directory": "packages/prefab-tools"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "bin": {
+    "cocos-prefab": "src/cli.mjs"
+  },
+  "files": [
+    "src/"
+  ],
+  "scripts": {
+    "test": "node --test"
+  },
+  "dependencies": {
+    "typescript": "5.9.3"
+  }
+}
